@@ -19,7 +19,7 @@ class CurrentModePage extends StatefulWidget {
 }
 
 class _CurrentModePage extends State<CurrentModePage> {
-  late LEDModeModel model = LEDModeModel();
+  late LedMode model = LedMode();
   late StripModes select = model.mode;
   @override
   initState() {
@@ -42,7 +42,7 @@ class _CurrentModePage extends State<CurrentModePage> {
   Widget gradient = Container(color: Colors.black12);
   @override
   Widget build(BuildContext context) {
-    model = Provider.of<LEDControllerModel>(context, listen: false).selectedMode;
+    model = Provider.of<LedController>(context, listen: false).selectedMode;
     animationModel = AnimationModel(model.colors, model.mode, Duration(milliseconds: model.speed * 1000));
     select = model.mode;
     return Container(
@@ -76,7 +76,7 @@ class _CurrentModePage extends State<CurrentModePage> {
                 rangeValues: RangeValues(model.zoneStart.toDouble(), model.zoneEnd.toDouble()),
                 change: (RangeValues value) {
                   setState(() {
-                    Provider.of<LEDControllerModel>(context, listen: false)
+                    Provider.of<LedController>(context, listen: false)
                         .selectedMode
                         .setZone(value.start.toInt(), value.end.toInt());
                     model.setZone(value.start.toInt(), value.end.toInt());
@@ -89,7 +89,7 @@ class _CurrentModePage extends State<CurrentModePage> {
                 colors: model.colors,
                 change: (colors) => setState(() {
                       model.colors = colors;
-                      Provider.of<LEDControllerModel>(context, listen: false).selectedMode.colors = colors;
+                      Provider.of<LedController>(context, listen: false).selectedMode.colors = colors;
                       animationModel.colors = colors;
                     }),
                 colorLength: model.colorLength),
@@ -147,7 +147,7 @@ class _CurrentModePage extends State<CurrentModePage> {
 
   changeMode(StripModes? mode) {
     if (mode != null && mode != model.mode) {
-      Provider.of<LEDControllerModel>(context, listen: false).selectedMode.mode = mode;
+      Provider.of<LedController>(context, listen: false).selectedMode.mode = mode;
       model.mode = mode;
       animationModel.mode = mode;
       setState(() {});
@@ -159,7 +159,7 @@ class _CurrentModePage extends State<CurrentModePage> {
       name = "Новый режим";
     }
     if (name != model.name) {
-      Provider.of<LEDControllerModel>(context, listen: false).selectedMode.name = name;
+      Provider.of<LedController>(context, listen: false).selectedMode.name = name;
       model.name = name;
       setState(() {});
     }
@@ -174,7 +174,7 @@ class _CurrentModePage extends State<CurrentModePage> {
     }
     if (speed0 != model.speed) {
       model.speed = speed0;
-      Provider.of<LEDControllerModel>(context, listen: false).selectedMode.speed = speed0;
+      Provider.of<LedController>(context, listen: false).selectedMode.speed = speed0;
       animationModel.duration = Duration(milliseconds: speed0 * 1000);
       setState(() {});
     }

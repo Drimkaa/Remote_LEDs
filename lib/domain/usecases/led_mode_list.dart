@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 
 import 'led_mode.dart';
 
-class LEDModeList with ChangeNotifier {
-  LEDModeModel? selectedMode;
-  final List<LEDModeModel> _active;
+class LedModeList with ChangeNotifier {
+  LedMode? selectedMode;
+  final List<LedMode> _active;
 
-  final List<LEDModeModel> _all;
+  final List<LedMode> _all;
 
-  LEDModeList(List<LEDModeModel> active, List<LEDModeModel> all)
+  LedModeList(List<LedMode> active, List<LedMode> all)
       : _active = active,
         _all = all;
 
-  addNewMode(LEDModeModel mode) {
+  addNewMode(LedMode mode) {
     _all.add(mode);
     notifyListeners();
   }
 
-  deleteMode(LEDModeModel mode) {
+  deleteMode(LedMode mode) {
     _all.removeWhere((element) => element.key == mode.key);
     _active.removeWhere((element) => element.key == mode.key);
     notifyListeners();
   }
 
-  editMode(LEDModeModel mode) {
+  editMode(LedMode mode) {
     int index = _all.indexWhere((element) => element.key == mode.key);
     if (index >= 0) {
       _all[index] = mode;
@@ -37,7 +37,7 @@ class LEDModeList with ChangeNotifier {
     notifyListeners();
   }
 
-  addActiveMode(LEDModeModel mode) {
+  addActiveMode(LedMode mode) {
     _active.add(mode);
     if (!_all.contains(mode)) {
       _all.add(mode);
@@ -45,6 +45,6 @@ class LEDModeList with ChangeNotifier {
     notifyListeners();
   }
 
-  List<LEDModeModel> get all => _all;
-  List<LEDModeModel> get active => _active;
+  List<LedMode> get all => _all;
+  List<LedMode> get active => _active;
 }

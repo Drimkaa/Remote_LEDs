@@ -8,11 +8,11 @@ enum PageStatus {
   edit,
 }
 
-class LEDControllerModel with ChangeNotifier {
+class LedController with ChangeNotifier {
   bool _isOn;
   int _brightness;
   UniqueKey key;
-  List<LEDModeModel> modeList;
+  List<LedMode> modeList;
   PageStatus _pageStatus = PageStatus.browse;
 
   PageStatus get pageStatus => _pageStatus;
@@ -22,7 +22,7 @@ class LEDControllerModel with ChangeNotifier {
     notifyListeners();
   }
 
-  LEDControllerModel({
+  LedController({
     bool isOn = false,
     int brightness = 255,
     required this.modeList,
@@ -44,9 +44,9 @@ class LEDControllerModel with ChangeNotifier {
     notifyListeners();
   }
 
-  LEDModeModel selectedMode = LEDModeModel();
+  LedMode selectedMode = LedMode();
 
-  editMode(LEDModeModel mode) {
+  editMode(LedMode mode) {
     int index = modeList.indexWhere((element) => element.key == mode.key);
     if (index >= 0) {
       modeList[index] = mode;
@@ -54,7 +54,7 @@ class LEDControllerModel with ChangeNotifier {
     notifyListeners();
   }
 
-  deleteMode(LEDModeModel mode) {
+  deleteMode(LedMode mode) {
     modeList.removeWhere((element) => element.key == mode.key);
     notifyListeners();
   }

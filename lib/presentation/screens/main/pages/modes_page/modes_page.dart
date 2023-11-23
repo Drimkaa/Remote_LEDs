@@ -24,7 +24,7 @@ class _ModesPage extends State<ModesPage> {
   double y = 0;
   changeTree(BuildContext context) {
     Provider.of<ModesPageModel>(context, listen: false).pageSetMode();
-    Provider.of<ModesPageModel>(context, listen: false).addMode(LEDModeCardModel(LEDModeModel(colors: [Colors.blueAccent])));
+    Provider.of<ModesPageModel>(context, listen: false).addMode(LedModeCard(LedMode(colors: [Colors.blueAccent])));
   }
 
   void init() async {}
@@ -39,7 +39,7 @@ class _ModesPage extends State<ModesPage> {
   @override
   Widget build(BuildContext context) {
     model = Provider.of<ModesPageModel>(context, listen: true);
-    List<LEDModeCardModel> modes = model.modes;
+    List<LedModeCard> modes = model.modes;
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: Stack(

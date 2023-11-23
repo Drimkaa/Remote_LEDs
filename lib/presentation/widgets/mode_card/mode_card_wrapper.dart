@@ -13,7 +13,7 @@ class ModeCardWrapper extends StatefulWidget {
       required this.changeDeleteStatus,
       required this.onTap});
 
-  final LEDModeCardModel model;
+  final LedModeCard model;
   final PageMode pageMode;
   final void Function() onLongPress;
   final void Function() onTap;

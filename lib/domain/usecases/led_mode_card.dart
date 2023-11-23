@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:remote_leds/domain/usecases/led_mode.dart';
 
-class LEDModeCardModel with ChangeNotifier {
-  LEDModeModel model;
-  LEDModeCardModel(this.model);
+class LedModeCard with ChangeNotifier {
+  LedMode model;
+  LedModeCard(this.model);
 
   changeActive() {
     if (model.isActive) {

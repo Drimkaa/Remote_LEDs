@@ -3,11 +3,11 @@ import 'package:remote_leds/domain/constants/strip_modes.dart';
 
 export 'package:remote_leds/domain/constants/strip_modes.dart';
 
-class LEDModeModel with ChangeNotifier {
+class LedMode with ChangeNotifier {
   final UniqueKey _key;
   get key => _key;
 
-  LEDModeModel({
+  LedMode({
     StripModes? mode,
     int speed = 1,
     List<int>? zone,

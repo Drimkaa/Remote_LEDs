@@ -57,8 +57,8 @@ class ModesPageModel extends ChangeNotifier {
   setViewMode() async {
     _appBarModel.setAppBar(ModesPageViewModeAppBar(
       onTap: () {
-        _screenModel.setPage(ModeEditor(
-          model: LEDModeModel(),
+        _screenModel.setPage(EditScreen(
+          model: LedMode(),
           type: PickerType.add,
         ));
       },
@@ -80,16 +80,16 @@ class ModesPageModel extends ChangeNotifier {
     }
   }
 
-  final List<LEDModeCardModel> _modes = [];
-  List<LEDModeCardModel> get modes => _modes;
+  final List<LedModeCard> _modes = [];
+  List<LedModeCard> get modes => _modes;
 
-  addMode(LEDModeCardModel modeCard) {
+  addMode(LedModeCard modeCard) {
     _modes.add(modeCard);
     _allDeleted = false;
     notifyListeners();
   }
 
-  deleteMode(LEDModeCardModel modeCard) {
+  deleteMode(LedModeCard modeCard) {
     print("удалил");
     int index = _modes.indexWhere((element) => element.model.key == modeCard.model.key);
     print(index);
@@ -102,7 +102,7 @@ class ModesPageModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  editMode(LEDModeCardModel modeCard) {
+  editMode(LedModeCard modeCard) {
     int index = _modes.indexWhere((element) => element.model.key == modeCard.model.key);
     print(index);
     if (index >= 0) {
@@ -168,7 +168,7 @@ class ModesPageModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  cardOnLongPress(LEDModeCardModel modeCard) {
+  cardOnLongPress(LedModeCard modeCard) {
     if (pageMode == PageMode.view) {
       setDeleteMode();
     }
@@ -177,9 +177,9 @@ class ModesPageModel extends ChangeNotifier {
     calculateSelectedToDelete();
   }
 
-  cardOnPress(LEDModeCardModel modeCard) {
+  cardOnPress(LedModeCard modeCard) {
     if (pageMode == PageMode.view) {
-      _screenModel.setPage(ModeEditor(
+      _screenModel.setPage(EditScreen(
         model: modeCard.model,
         type: PickerType.edit,
       ));
@@ -189,7 +189,7 @@ class ModesPageModel extends ChangeNotifier {
     }
   }
 
-  cardChangeDeleteStatus(LEDModeCardModel modeCard) {
+  cardChangeDeleteStatus(LedModeCard modeCard) {
     modeCard.changeDeleteStatus();
     calculateSelectedToDelete();
   }

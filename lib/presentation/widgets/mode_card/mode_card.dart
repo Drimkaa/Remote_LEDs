@@ -8,7 +8,7 @@ import 'package:remote_leds/presentation/widgets/something/custom_switch.dart';
 class ModeCard extends StatefulWidget {
   const ModeCard({super.key, required this.model});
 
-  final LEDModeCardModel model;
+  final LedModeCard model;
 
   @override
   State<StatefulWidget> createState() => _ModeCard();
@@ -17,7 +17,7 @@ class ModeCard extends StatefulWidget {
 class _ModeCard extends State<ModeCard> {
   @override
   Widget build(BuildContext context) {
-    LEDModeCardModel model = widget.model;
+    LedModeCard model = widget.model;
     return Container(
       clipBehavior: Clip.antiAlias,
       padding: padding(8),

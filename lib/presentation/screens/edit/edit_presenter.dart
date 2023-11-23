@@ -8,7 +8,7 @@ import 'package:remote_leds/presentation/widgets/animations_model.dart';
 
 class EditScreenModel extends ChangeNotifier {
   late PickerType pageType;
-  late LEDModeModel led;
+  late LedMode led;
   late ModesPageModel _modesPageModel;
 
   EditScreenModel();
@@ -23,7 +23,7 @@ class EditScreenModel extends ChangeNotifier {
     _screenModel = screenModel;
   }
 
-  init({pageType = PickerType.add, required LEDModeModel led}) {
+  init({pageType = PickerType.add, required LedMode led}) {
     this.led = led;
     this.pageType = pageType;
     animationModel = AnimationModel(led.colors, led.mode, Duration(seconds: led.speed));
@@ -98,17 +98,17 @@ class EditScreenModel extends ChangeNotifier {
   }
 
   addNewMode() {
-    if (led.colors.isNotEmpty) _modesPageModel.addMode(LEDModeCardModel(led));
+    if (led.colors.isNotEmpty) _modesPageModel.addMode(LedModeCard(led));
     moveBack();
   }
 
   editExistingMode() {
-    if (led.colors.isNotEmpty) _modesPageModel.editMode(LEDModeCardModel(led));
+    if (led.colors.isNotEmpty) _modesPageModel.editMode(LedModeCard(led));
     moveBack();
   }
 
   deleteExistingMode() {
-    _modesPageModel.deleteMode(LEDModeCardModel(led));
+    _modesPageModel.deleteMode(LedModeCard(led));
     moveBack();
   }
 

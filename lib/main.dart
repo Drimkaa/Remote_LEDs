@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
               ChangeNotifierProvider<HomePageModel>(create: (context) => HomePageModel()),
               ChangeNotifierProvider<MainScreenModel>(create: (context) => MainScreenModel()),
               ChangeNotifierProvider<ConnectPageModel>(create: (context) => ConnectPageModel()),
-              ChangeNotifierProvider<LEDControllerModel>(create: (context) => LEDControllerModel(modeList: [])),
+              ChangeNotifierProvider<LedController>(create: (context) => LedController(modeList: [])),
             ],
             child: ThemeSwitchingArea(
               child: Consumer<ScreenModel>(builder: (context, page, child) {

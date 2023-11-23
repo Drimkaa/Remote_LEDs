@@ -8,7 +8,7 @@ class ModeDeleteCard extends StatefulWidget {
   const ModeDeleteCard({super.key, required this.model, required this.changeDeleteStatus});
 
   final void Function() changeDeleteStatus;
-  final LEDModeCardModel model;
+  final LedModeCard model;
 
   @override
   State<StatefulWidget> createState() => _ModeDeleteCard();
@@ -30,7 +30,7 @@ class _ModeDeleteCard extends State<ModeDeleteCard> {
 
   @override
   Widget build(BuildContext context) {
-    LEDModeCardModel model = widget.model;
+    LedModeCard model = widget.model;
     return Container(
       clipBehavior: Clip.antiAlias,
       padding: padding(8),

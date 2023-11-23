@@ -10,15 +10,15 @@ import 'package:remote_leds/presentation/widgets/something/input.dart';
 import 'package:remote_leds/presentation/widgets/something/select_mode.dart';
 import 'package:remote_leds/presentation/widgets/something/select_zone.dart';
 
-class ModeEditor extends StatefulWidget {
-  const ModeEditor({super.key, required this.type, required this.model});
+class EditScreen extends StatefulWidget {
+  const EditScreen({super.key, required this.type, required this.model});
   final PickerType type;
-  final LEDModeModel model;
+  final LedMode model;
   @override
-  State<ModeEditor> createState() => _ModeEditorState();
+  State<EditScreen> createState() => _EditScreenState();
 }
 
-class _ModeEditorState extends State<ModeEditor> {
+class _EditScreenState extends State<EditScreen> {
   late EditScreenModel pageModel;
   @override
   void initState() {
