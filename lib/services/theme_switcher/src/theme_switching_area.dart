@@ -5,9 +5,9 @@ import 'theme_provider.dart';
 
 class ThemeSwitchingArea extends StatelessWidget {
   const ThemeSwitchingArea({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   final Widget child;
 

@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:remote_leds/components/app_bar/appbar.dart';
-import 'package:remote_leds/components/bottom_navigation.dart';
-import 'package:remote_leds/components/color_model/LEDController.dart';
-import 'package:remote_leds/components/color_model/LEDModesPage.dart';
-import 'package:remote_leds/components/page_model.dart';
-import 'package:remote_leds/pages/connect/connect_page_model.dart';
-import 'package:remote_leds/pages/main/main_page_model.dart';
+import 'package:remote_leds/domain/usecases/led_controller.dart';
+import 'package:remote_leds/presentation/screens/main/pages/modes_page/modes_page_presenter.dart';
+
+import 'package:remote_leds/presentation/screens/connect/connect_presenter.dart';
+import 'package:remote_leds/presentation/screens/edit/edit_presenter.dart';
+import 'package:remote_leds/presentation/screens/main/main_presenter.dart';
+import 'package:remote_leds/presentation/screens/main/pages/home_page/home_page_presenter.dart';
+import 'package:remote_leds/presentation/screens/screen_presenter.dart';
+
+import 'package:remote_leds/presentation/widgets/appbar/appbar.dart';
 
 import 'package:remote_leds/services/theme/theme.dart';
 import 'package:remote_leds/services/theme_switcher/animated_theme_switcher.dart';
 
-import 'services/sclaed_route/scaled_route.dart';
-
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-
   final themeService = await ThemeService.instance;
 
   var initTheme = themeService.initial;
@@ -24,9 +23,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, required this.theme}) : super(key: key);
+  const MyApp({super.key, required this.theme});
   final ThemeData theme;
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
@@ -40,17 +38,31 @@ class MyApp extends StatelessWidget {
           home: MultiProvider(
             providers: [
               ChangeNotifierProvider<AppBarModel>(create: (context) => AppBarModel()),
-              ChangeNotifierProvider<PageModel>(create: (context) => PageModel()),
-              ChangeNotifierProvider<BottomRoutesModel>(create: (context)=>BottomRoutesModel()),
-              ChangeNotifierProvider<MainPageModel>(create: (context) => MainPageModel()),
+              ChangeNotifierProvider<ModesPageModel>(create: (context) => ModesPageModel()),
+              ChangeNotifierProvider<ScreenModel>(create: (context) => ScreenModel()),
+              ChangeNotifierProxyProvider2<ModesPageModel, ScreenModel, EditScreenModel>(
+                create: (context) => EditScreenModel(),
+                lazy: false,
+                update: (context, ledModeListPage, screenModel, editScreenModel) => editScreenModel!
+                  ..setListPageModel(ledModeListPage)
+                  ..setScreenModel(screenModel),
+              ),
+              ChangeNotifierProxyProvider2<ScreenModel,AppBarModel, ModesPageModel>(
+                create: (context) => ModesPageModel(),
+                lazy: false,
+                update: (context, screenModel,appBarModel, editScreenModel) => editScreenModel!
+                  ..setScreenModel(screenModel)
+                  ..setAppBarModel(appBarModel),
+              ),
+              ChangeNotifierProvider<HomePageModel>(create: (context) => HomePageModel()),
+              ChangeNotifierProvider<MainScreenModel>(create: (context) => MainScreenModel()),
               ChangeNotifierProvider<ConnectPageModel>(create: (context) => ConnectPageModel()),
-              ChangeNotifierProvider<LEDControlModel>(create: (context) => LEDControlModel()),
-              ],
-            child:  ThemeSwitchingArea(child:
-            Consumer<PageModel>(builder: (context, page, child) {
-              return  page.current;
-            }),
-
+              ChangeNotifierProvider<LEDControllerModel>(create: (context) => LEDControllerModel(modeList: [])),
+            ],
+            child: ThemeSwitchingArea(
+              child: Consumer<ScreenModel>(builder: (context, page, child) {
+                return page.current;
+              }),
             ),
           ),
         );

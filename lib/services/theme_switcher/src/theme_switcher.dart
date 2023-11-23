@@ -11,10 +11,10 @@ typedef BuilderWithTheme = Widget Function(
 
 class ThemeSwitcher extends StatefulWidget {
   const ThemeSwitcher({
-    Key? key,
+    super.key,
     this.clipper = const ThemeSwitcherClipper(),
     required this.builder,
-  }) : super(key: key);
+  });
 
   factory ThemeSwitcher.switcher({
     Key? key,
@@ -81,9 +81,8 @@ class _InheritedThemeSwitcher extends InheritedWidget {
 
   const _InheritedThemeSwitcher({
     required this.data,
-    Key? key,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+  });
 
   @override
   bool updateShouldNotify(_InheritedThemeSwitcher oldWidget) {

@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart';
+
+
 import 'clippers/theme_switcher_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -9,12 +12,12 @@ typedef ThemeBuilder = Widget Function(BuildContext, ThemeData theme);
 
 class ThemeProvider extends StatefulWidget {
   const ThemeProvider({
-    Key? key,
+    super.key,
     this.builder,
     this.child,
     required this.initTheme,
     this.duration = const Duration(milliseconds: 300),
-  }) : super(key: key);
+  });
 
   final ThemeBuilder? builder;
   final Widget? child;
@@ -61,10 +64,10 @@ class _ThemeProviderState extends State<ThemeProvider>
 
 class ThemeModelInheritedNotifier extends InheritedNotifier<ThemeModel> {
   const ThemeModelInheritedNotifier({
-    Key? key,
-    required ThemeModel notifier,
-    required Widget child,
-  }) : super(key: key, notifier: notifier, child: child);
+    super.key,
+    required ThemeModel super.notifier,
+    required super.child,
+  });
 
   static ThemeModel of(BuildContext context) {
     return context
@@ -123,9 +126,10 @@ class ThemeModel extends ChangeNotifier {
   }
 
   Future<void> _saveScreenshot() async {
-    final boundary = previewContainer.currentContext!.findRenderObject()
+    final boundary = previewContainer.currentContext?.findRenderObject()
     as RenderRepaintBoundary;
-    image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
+    image = await boundary.toImage(pixelRatio:  PlatformDispatcher.instance.implicitView!.devicePixelRatio);
+    //TODO проверить работает ли changeDevisePixelRatio
     notifyListeners();
   }
 
@@ -138,7 +142,7 @@ class ThemeModel extends ChangeNotifier {
   Offset _getSwitcherCoordinates(
       GlobalKey<State<StatefulWidget>> switcherGlobalKey) {
     final renderObject =
-    switcherGlobalKey.currentContext!.findRenderObject()! as RenderBox;
+    switcherGlobalKey.currentContext?.findRenderObject() as RenderBox;
     final size = renderObject.size;
     return renderObject
         .localToGlobal(Offset.zero)
