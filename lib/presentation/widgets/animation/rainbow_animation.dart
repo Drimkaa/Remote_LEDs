@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class RainbowAnimation extends StatefulWidget {
-   const RainbowAnimation({super.key, required this.colors, this.duration = const Duration(seconds: 0, milliseconds: 200)});
-   final List<Color> colors;
-   final Duration duration;
+  const RainbowAnimation({super.key, required this.colors, this.duration = const Duration(seconds: 0, milliseconds: 200)});
+
+  final List<Color> colors;
+  final Duration duration;
   @override
   State<StatefulWidget> createState() => _RainbowAnimation();
 }

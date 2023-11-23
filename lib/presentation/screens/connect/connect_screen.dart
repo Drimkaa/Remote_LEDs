@@ -1,7 +1,8 @@
 import 'dart:async';
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'dart:ui' as ui;
 import 'package:provider/provider.dart';
 import 'package:quick_blue/quick_blue.dart';
 import 'package:remote_leds/presentation/screens/connect/connect_presenter.dart';
@@ -82,17 +83,13 @@ class _ConnectPage extends State<ConnectPage> with SingleTickerProviderStateMixi
   }
 
   checkPermissions() async {
-
     if (!await Permission.bluetoothConnect.request().isGranted) {
-
       await Permission.bluetoothConnect.request();
     }
     if (!await Permission.bluetoothScan.request().isGranted) {
-
       await Permission.bluetoothScan.request();
     }
     if (!await Permission.bluetooth.request().isGranted) {
-
       await Permission.bluetooth.request();
     }
   }
@@ -116,15 +113,14 @@ class _ConnectPage extends State<ConnectPage> with SingleTickerProviderStateMixi
                 height: 240.0,
                 width: 240.0,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 50, 50, 50),
-                  borderRadius: BorderRadius.circular(150),
-                  gradient: LinearGradient(colors: colors, stops: _stops.map((s) => s + animation.value).toList())
-                ),
+                    color: const Color.fromARGB(255, 50, 50, 50),
+                    borderRadius: BorderRadius.circular(150),
+                    gradient: LinearGradient(colors: colors, stops: _stops.map((s) => s + animation.value).toList())),
                 child: BackdropFilter(
                   filter: ui.ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
                   child: Container(
                     decoration:
-                    BoxDecoration(color: const Color.fromARGB(255, 50, 50, 50), borderRadius: BorderRadius.circular(150)),
+                        BoxDecoration(color: const Color.fromARGB(255, 50, 50, 50), borderRadius: BorderRadius.circular(150)),
                     child: model.status == ConnectStatus.progress ? loadingIcon : icon,
                   ),
                 ),

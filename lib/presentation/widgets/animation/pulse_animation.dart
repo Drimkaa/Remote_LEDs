@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class PulseAnimation extends StatefulWidget {
-  const PulseAnimation({super.key,required this.colors, this.duration =const Duration(seconds: 0,milliseconds: 200)});
+  const PulseAnimation({super.key, required this.colors, this.duration = const Duration(seconds: 0, milliseconds: 200)});
   final List<Color> colors;
   final Duration duration;
 
@@ -32,24 +32,23 @@ class _PulseAnimation extends State<PulseAnimation> {
   }
 
   void updateColors() {
-
     setState(() {
-
-      if(counter%2==0){
-        if(counter~/2==widget.colors.length){counter=0;}
-        color = widget.colors[counter~/2];
+      if (counter % 2 == 0) {
+        if (counter ~/ 2 == widget.colors.length) {
+          counter = 0;
+        }
+        color = widget.colors[counter ~/ 2];
         duration = widget.duration;
         _timer.cancel();
         _timer = Timer.periodic(widget.duration, _updateTimer);
       } else {
-
         duration = const Duration(milliseconds: 1000);
         color = Colors.black12;
         _timer.cancel();
         _timer = Timer.periodic(const Duration(milliseconds: 1000), _updateTimer);
       }
     });
-    counter+=1;
+    counter += 1;
   }
 
   void _updateTimer(Timer timer) {
@@ -59,7 +58,6 @@ class _PulseAnimation extends State<PulseAnimation> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-
       color: color,
       duration: duration,
     );

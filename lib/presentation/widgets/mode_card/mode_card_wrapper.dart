@@ -5,16 +5,19 @@ import 'package:remote_leds/presentation/widgets/mode_card/mode_card.dart';
 import 'package:remote_leds/presentation/widgets/mode_card/mode_card_edit.dart';
 
 class ModeCardWrapper extends StatefulWidget {
-    const ModeCardWrapper({super.key, required this.model,
+  const ModeCardWrapper(
+      {super.key,
+      required this.model,
       required this.pageMode,
       required this.onLongPress,
       required this.changeDeleteStatus,
       required this.onTap});
-    final LEDModeCardModel model;
-    final PageMode pageMode;
+
+  final LEDModeCardModel model;
+  final PageMode pageMode;
   final void Function() onLongPress;
   final void Function() onTap;
-    final void Function() changeDeleteStatus;
+  final void Function() changeDeleteStatus;
   @override
   State<StatefulWidget> createState() => _ModeCardWrapper();
 }
@@ -38,10 +41,8 @@ class _ModeCardWrapper extends State<ModeCardWrapper> {
     return GestureDetector(
         onLongPress: widget.onLongPress,
         onTap: widget.onTap,
-        child:
-        widget.pageMode==PageMode.delete?
-        ModeDeleteCard(model: widget.model,changeDeleteStatus:()=>widget.changeDeleteStatus()):
-        ModeCard(model: widget.model));
-
+        child: widget.pageMode == PageMode.delete
+            ? ModeDeleteCard(model: widget.model, changeDeleteStatus: () => widget.changeDeleteStatus())
+            : ModeCard(model: widget.model));
   }
 }

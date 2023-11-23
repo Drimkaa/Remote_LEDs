@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:remote_leds/domain/usecases/led_controller.dart';
-import 'package:remote_leds/presentation/screens/main/pages/modes_page/modes_page_presenter.dart';
-
 import 'package:remote_leds/presentation/screens/connect/connect_presenter.dart';
 import 'package:remote_leds/presentation/screens/edit/edit_presenter.dart';
 import 'package:remote_leds/presentation/screens/main/main_presenter.dart';
 import 'package:remote_leds/presentation/screens/main/pages/home_page/home_page_presenter.dart';
+import 'package:remote_leds/presentation/screens/main/pages/modes_page/modes_page_presenter.dart';
 import 'package:remote_leds/presentation/screens/screen_presenter.dart';
-
 import 'package:remote_leds/presentation/widgets/appbar/appbar.dart';
-
 import 'package:remote_leds/services/theme/theme.dart';
 import 'package:remote_leds/services/theme_switcher/animated_theme_switcher.dart';
 
@@ -47,10 +44,10 @@ class MyApp extends StatelessWidget {
                   ..setListPageModel(ledModeListPage)
                   ..setScreenModel(screenModel),
               ),
-              ChangeNotifierProxyProvider2<ScreenModel,AppBarModel, ModesPageModel>(
+              ChangeNotifierProxyProvider2<ScreenModel, AppBarModel, ModesPageModel>(
                 create: (context) => ModesPageModel(),
                 lazy: false,
-                update: (context, screenModel,appBarModel, editScreenModel) => editScreenModel!
+                update: (context, screenModel, appBarModel, editScreenModel) => editScreenModel!
                   ..setScreenModel(screenModel)
                   ..setAppBarModel(appBarModel),
               ),

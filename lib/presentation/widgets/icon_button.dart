@@ -17,20 +17,19 @@ class CustomIconButton extends StatelessWidget {
     return SizedBox(
         width: iconSize,
         height: iconSize,
-        child:Theme(
-      data: Theme.of(context).copyWith(
-        hoverColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-      ),
-      child: IconButton(
-
-        iconSize: iconSize,
-        onPressed: onPressed,
-        icon:  Icon(iconData),
-        padding: const EdgeInsets.all(0),
-      ),
-    ));
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            hoverColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+          ),
+          child: IconButton(
+            iconSize: iconSize,
+            onPressed: onPressed,
+            icon: Icon(iconData),
+            padding: const EdgeInsets.all(0),
+          ),
+        ));
   }
 }
 
@@ -61,19 +60,18 @@ class CustomColorIconButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: background,
           borderRadius: BorderRadius.all(Radius.circular(radius)),
-          border: Border.all(color: borderColor,width: borderSize),
+          border: Border.all(color: borderColor, width: borderSize),
         ),
-        child:Theme(
+        child: Theme(
           data: Theme.of(context).copyWith(
             hoverColor: Colors.transparent,
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
           ),
           child: IconButton(
-
-            iconSize: iconSize-10,
+            iconSize: iconSize - 10,
             onPressed: onPressed,
-            icon:  Icon(iconData),
+            icon: Icon(iconData),
             padding: const EdgeInsets.all(0),
           ),
         ));

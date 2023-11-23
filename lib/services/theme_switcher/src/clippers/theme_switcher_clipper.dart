@@ -1,21 +1,20 @@
 import 'dart:math';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 @immutable
 class ThemeSwitcherClipper {
-   const ThemeSwitcherClipper();
+  const ThemeSwitcherClipper();
 
   Rect getClip(Size size, Offset? offset, double? sizeRate) {
-    return
-        Rect.fromCircle(
-          center: offset!,
-          radius: lerpDouble(0, _calcMaxRadius(size, offset), sizeRate!)!,
-        );
+    return Rect.fromCircle(
+      center: offset!,
+      radius: lerpDouble(0, _calcMaxRadius(size, offset), sizeRate!)!,
+    );
   }
 
-  bool shouldReclip(
-      CustomClipper<Rect> oldClipper, Offset? offset, double? sizeRate) {
+  bool shouldReclip(CustomClipper<Rect> oldClipper, Offset? offset, double? sizeRate) {
     return true;
   }
 

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:remote_leds/domain/constants/strip_modes.dart';
-import 'package:remote_leds/domain/usecases/led_mode_card.dart';
 import 'package:remote_leds/domain/usecases/led_mode.dart';
+import 'package:remote_leds/domain/usecases/led_mode_card.dart';
 import 'package:remote_leds/presentation/widgets/constants.dart';
 import 'package:remote_leds/presentation/widgets/something/custom_switch.dart';
 
 class ModeCard extends StatefulWidget {
-   const ModeCard({super.key, required this.model});
-   final LEDModeCardModel model;
+  const ModeCard({super.key, required this.model});
+
+  final LEDModeCardModel model;
 
   @override
   State<StatefulWidget> createState() => _ModeCard();

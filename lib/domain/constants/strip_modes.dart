@@ -1,4 +1,3 @@
-
 // ignore_for_file: file_names
 
 enum StripModes {
@@ -8,8 +7,9 @@ enum StripModes {
   fire,
   pulse,
 }
-String stripModeToString(StripModes mode){
-  switch(mode){
+
+String stripModeToString(StripModes mode) {
+  switch (mode) {
     case StripModes.static:
       return "Статичный цвет";
     case StripModes.fading:
@@ -20,11 +20,11 @@ String stripModeToString(StripModes mode){
       return "Огонь";
     case StripModes.pulse:
       return "Пульсация";
-
   }
 }
-String stripModesToStringDescription(StripModes mode){
-  switch(mode){
+
+String stripModesToStringDescription(StripModes mode) {
+  switch (mode) {
     case StripModes.static:
       return "Статичный цвет";
     case StripModes.fading:

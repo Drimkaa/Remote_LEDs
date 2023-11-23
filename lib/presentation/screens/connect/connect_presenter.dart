@@ -11,19 +11,23 @@ class ConnectPageModel with ChangeNotifier {
   ConnectStatus _status = ConnectStatus.empty;
   ConnectStatus get status => _status;
   set status(ConnectStatus status) {
-    if(_status == status){return;}
+    if (_status == status) {
+      return;
+    }
     _status = status;
-    notifyListeners();}
+    notifyListeners();
+  }
+
   String get textStatus {
-    switch (_status){
+    switch (_status) {
       case ConnectStatus.connected:
-        return"Подключение выполнено";
+        return "Подключение выполнено";
       case ConnectStatus.error:
-        return"Подключение не удалось, попробуйте еще раз";
+        return "Подключение не удалось, попробуйте еще раз";
       case ConnectStatus.progress:
-        return"Подключение выполняется";
+        return "Подключение выполняется";
       case ConnectStatus.empty:
-        return"Подключиться к ленте";
+        return "Подключиться к ленте";
     }
   }
 }

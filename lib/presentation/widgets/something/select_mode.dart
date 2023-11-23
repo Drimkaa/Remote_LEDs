@@ -5,7 +5,7 @@ import 'package:remote_leds/domain/constants/strip_modes.dart';
 class SelectModeField extends StatefulWidget {
   const SelectModeField({super.key, required this.mode, required this.change});
   final void Function(StripModes value) change;
-  final  StripModes mode;
+  final StripModes mode;
 
   @override
   State<StatefulWidget> createState() => _SelectModeField();
@@ -59,4 +59,3 @@ class _SelectModeField extends State<SelectModeField> {
     super.dispose();
   }
 }
-

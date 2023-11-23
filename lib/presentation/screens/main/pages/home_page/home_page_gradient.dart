@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
+
 class HomePageGradient extends StatefulWidget {
-  const HomePageGradient({super.key,required this.width, required this.brightness});
+  const HomePageGradient({super.key, required this.width, required this.brightness});
   final int brightness;
   final double width;
   @override
@@ -58,17 +59,16 @@ class _HomePageGradient extends State<HomePageGradient> with SingleTickerProvide
 
   double temp = 0;
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
       width: widget.width * 1.2,
-      height: (widget.width/3 * 1.5),
+      height: (widget.width / 3 * 1.5),
       padding: EdgeInsets.zero,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 250, 250, 250).withOpacity(widget.brightness / 100),
-        borderRadius: BorderRadius.circular(widget.width/6),
+        borderRadius: BorderRadius.circular(widget.width / 6),
         gradient: LinearGradient(colors: colors, stops: _stops.map((s) => s + animation.value).toList()),
       ),
       child: BackdropFilter(

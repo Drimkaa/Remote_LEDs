@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:remote_leds/domain/constants/strip_modes.dart';
-import 'package:remote_leds/domain/usecases/led_mode_card.dart';
 import 'package:remote_leds/domain/usecases/led_mode.dart';
+import 'package:remote_leds/domain/usecases/led_mode_card.dart';
 import 'package:remote_leds/presentation/widgets/constants.dart';
 
-class  ModeDeleteCard extends StatefulWidget {
-   const ModeDeleteCard({super.key, required this.model,required this.changeDeleteStatus});
-   final void Function() changeDeleteStatus;
-   final  LEDModeCardModel model;
+class ModeDeleteCard extends StatefulWidget {
+  const ModeDeleteCard({super.key, required this.model, required this.changeDeleteStatus});
+
+  final void Function() changeDeleteStatus;
+  final LEDModeCardModel model;
 
   @override
   State<StatefulWidget> createState() => _ModeDeleteCard();
@@ -87,7 +88,7 @@ class _ModeDeleteCard extends State<ModeDeleteCard> {
               GestureDetector(
                 onTap: () => setState(() {
                   widget.changeDeleteStatus();
-                  }),
+                }),
                 onLongPress: () => setState(() {
                   //TODO
                   widget.changeDeleteStatus();
@@ -121,6 +122,7 @@ class _ModeDeleteCard extends State<ModeDeleteCard> {
       ),
     );
   }
+
   Widget _buildColorCircle(BuildContext context, Color color) {
     return Container(
       height: 20,

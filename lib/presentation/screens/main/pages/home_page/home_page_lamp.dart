@@ -4,7 +4,7 @@ import 'package:remote_leds/presentation/screens/main/pages/home_page/home_page_
 import 'package:remote_leds/presentation/widgets/appbar/appbar.dart';
 
 class HomePageLamp extends StatefulWidget {
-  const HomePageLamp({super.key, this.status  = false, this.brightness = 70,required this.change});
+  const HomePageLamp({super.key, this.status = false, this.brightness = 70, required this.change});
   final bool status;
   final int brightness;
   final Function() change;
@@ -43,7 +43,9 @@ class _HomePageLamp extends State<HomePageLamp> with SingleTickerProviderStateMi
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {widget.change();},
+      onTap: () {
+        widget.change();
+      },
       child: Stack(
         alignment: Alignment.center,
         children: [

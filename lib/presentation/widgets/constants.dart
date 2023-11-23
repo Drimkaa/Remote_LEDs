@@ -5,23 +5,21 @@ EdgeInsetsGeometry padding8 = const EdgeInsets.all(8);
 EdgeInsetsGeometry padding2 = const EdgeInsets.all(2);
 EdgeInsetsGeometry padding4 = const EdgeInsets.all(4);
 EdgeInsetsGeometry padding0 = const EdgeInsets.all(0);
-EdgeInsetsGeometry padding(double value){
+
+EdgeInsetsGeometry padding(double value) {
   return EdgeInsets.all(value);
 }
+
 ButtonStyle buttonStyle(Color color) => TextButton.styleFrom(
       foregroundColor: color,
       shadowColor: Colors.transparent,
       padding: EdgeInsets.zero,
     );
-Decoration decorationRadius(double radius, Color background) => BoxDecoration(
-    color: background,
-    borderRadius: BorderRadius.all(Radius.circular(radius))
-);
+
+Decoration decorationRadius(double radius, Color background) =>
+    BoxDecoration(color: background, borderRadius: BorderRadius.all(Radius.circular(radius)));
 Decoration decorationBorder(double radius, double width, Color border, Color background) => BoxDecoration(
-    color: background,
-    border: Border.all(color: border, width: width),
-    borderRadius: BorderRadius.all(Radius.circular(radius))
-);
+    color: background, border: Border.all(color: border, width: width), borderRadius: BorderRadius.all(Radius.circular(radius)));
 
 Color greenColor = Colors.greenAccent;
 Color redColor = Colors.redAccent;

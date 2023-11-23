@@ -10,30 +10,39 @@ import 'package:remote_leds/presentation/widgets/appbar/modes_page_delete_appbar
 
 enum PageMode { view, delete }
 
-
 class ModesPageModel extends ChangeNotifier {
   ModesPageModel();
   late ScreenModel _screenModel;
-  void setScreenModel(ScreenModel screenModel){
+
+  void setScreenModel(ScreenModel screenModel) {
     _screenModel = screenModel;
   }
+
   late AppBarModel _appBarModel;
-  void setAppBarModel(AppBarModel appBarModel){
+
+  void setAppBarModel(AppBarModel appBarModel) {
     _appBarModel = appBarModel;
   }
+
   PageMode _pageMode = PageMode.view;
   PageMode get pageMode => _pageMode;
   bool readyToAnimation = false;
-  setDeleteMode() async{
+
+  setDeleteMode() async {
     for (var element in _modes) {
       element.delete = false;
     }
     calculateSelectedToDelete();
     _isSelected = false;
-    if(!_allDeleted){
+    if (!_allDeleted) {
       _appBarModel.setAppBar(ModesPageDeleteModeAppBar(
-        moveBack: () { setViewMode(); },
-        selectAll: () { makeAllSelected(); },));
+        moveBack: () {
+          setViewMode();
+        },
+        selectAll: () {
+          makeAllSelected();
+        },
+      ));
       readyToAnimation = true;
       notifyListeners();
       await Future.delayed(const Duration(milliseconds: 50));
@@ -42,13 +51,18 @@ class ModesPageModel extends ChangeNotifier {
       await Future.delayed(const Duration(milliseconds: 250));
       notifyListeners();
       readyToAnimation = false;
-
     }
   }
 
-  setViewMode() async{
+  setViewMode() async {
     _appBarModel.setAppBar(ModesPageViewModeAppBar(
-     onTap: () { _screenModel.setPage(ModeEditor(model: LEDModeModel(),type: PickerType.add,) ); },));
+      onTap: () {
+        _screenModel.setPage(ModeEditor(
+          model: LEDModeModel(),
+          type: PickerType.add,
+        ));
+      },
+    ));
     readyToAnimation = true;
     notifyListeners();
     _pageMode = PageMode.view;
@@ -57,13 +71,15 @@ class ModesPageModel extends ChangeNotifier {
     readyToAnimation = false;
     notifyListeners();
   }
-  pageSetMode(){
-    if(pageMode==PageMode.view){
+
+  pageSetMode() {
+    if (pageMode == PageMode.view) {
       setViewMode();
     } else {
       setDeleteMode();
     }
   }
+
   final List<LEDModeCardModel> _modes = [];
   List<LEDModeCardModel> get modes => _modes;
 
@@ -78,13 +94,12 @@ class ModesPageModel extends ChangeNotifier {
     int index = _modes.indexWhere((element) => element.model.key == modeCard.model.key);
     print(index);
     _modes.removeWhere((element) => element.model.key == modeCard.model.key);
-     index = _modes.indexWhere((element) => element.model.key == modeCard.model.key);
+    index = _modes.indexWhere((element) => element.model.key == modeCard.model.key);
     print(index);
 
     if (_modes.isEmpty) _allDeleted = true;
     calculateSelectedToDelete();
     notifyListeners();
-
   }
 
   editMode(LEDModeCardModel modeCard) {
@@ -152,24 +167,29 @@ class ModesPageModel extends ChangeNotifier {
     _isSelected = !_isSelected;
     notifyListeners();
   }
-  cardOnLongPress(LEDModeCardModel modeCard){
-    if(pageMode == PageMode.view){
+
+  cardOnLongPress(LEDModeCardModel modeCard) {
+    if (pageMode == PageMode.view) {
       setDeleteMode();
     }
-      modeCard.changeDeleteStatus();
+    modeCard.changeDeleteStatus();
 
-      calculateSelectedToDelete();
-
+    calculateSelectedToDelete();
   }
-  cardOnPress(LEDModeCardModel modeCard){
-    if(pageMode == PageMode.view){
-      _screenModel.setPage(ModeEditor(model: modeCard.model,type: PickerType.edit,) );
-    } else if( pageMode == PageMode.delete){
+
+  cardOnPress(LEDModeCardModel modeCard) {
+    if (pageMode == PageMode.view) {
+      _screenModel.setPage(ModeEditor(
+        model: modeCard.model,
+        type: PickerType.edit,
+      ));
+    } else if (pageMode == PageMode.delete) {
       modeCard.changeDeleteStatus();
       calculateSelectedToDelete();
     }
   }
-  cardChangeDeleteStatus(LEDModeCardModel modeCard){
+
+  cardChangeDeleteStatus(LEDModeCardModel modeCard) {
     modeCard.changeDeleteStatus();
     calculateSelectedToDelete();
   }

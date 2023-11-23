@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:remote_leds/domain/usecases/led_controller.dart';
 import 'package:remote_leds/presentation/widgets/animations.dart';
 import 'package:remote_leds/presentation/widgets/animations_model.dart';
-
 import 'package:remote_leds/presentation/widgets/appbar/appbar.dart';
 import 'package:remote_leds/presentation/widgets/constants.dart';
 import 'package:remote_leds/presentation/widgets/something/color_list.dart';
@@ -28,26 +27,27 @@ class _CurrentModePage extends State<CurrentModePage> {
     init();
     WidgetsBinding.instance.addPostFrameCallback((_) => changeTree(context));
   }
-  changeTree(BuildContext context){
-    Provider.of<AppBarModel>(context,listen: false).setCustomAppBar(text: "Текущий режим");
 
+  changeTree(BuildContext context) {
+    Provider.of<AppBarModel>(context, listen: false).setCustomAppBar(text: "Текущий режим");
   }
+
   void init() async {}
   @override
   void dispose() {
     super.dispose();
   }
-  late AnimationModel animationModel = AnimationModel(model.colors, model.mode, Duration(milliseconds: model.speed*1000));
+
+  late AnimationModel animationModel = AnimationModel(model.colors, model.mode, Duration(milliseconds: model.speed * 1000));
   Widget gradient = Container(color: Colors.black12);
   @override
   Widget build(BuildContext context) {
-    model = Provider.of<LEDControllerModel>(context,listen: false).selectedMode;
-    animationModel = AnimationModel(model.colors, model.mode, Duration(milliseconds: model.speed*1000));
+    model = Provider.of<LEDControllerModel>(context, listen: false).selectedMode;
+    animationModel = AnimationModel(model.colors, model.mode, Duration(milliseconds: model.speed * 1000));
     select = model.mode;
     return Container(
         padding: padding16,
-        child:
-        Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             InputField(
@@ -57,7 +57,11 @@ class _CurrentModePage extends State<CurrentModePage> {
               change: (name) => changeName(name),
             ),
             const SizedBox(height: 8.0),
-            SelectModeField(mode: model.mode, change: (StripModes value) {changeMode(value);}),
+            SelectModeField(
+                mode: model.mode,
+                change: (StripModes value) {
+                  changeMode(value);
+                }),
             const SizedBox(height: 8.0),
             InputField(
               label: "Скорость",
@@ -67,24 +71,28 @@ class _CurrentModePage extends State<CurrentModePage> {
               change: (name) => changeSpeed(name),
             ),
             const SizedBox(height: 8.0),
-        StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
+            StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
               return SelectZoneField(
                 rangeValues: RangeValues(model.zoneStart.toDouble(), model.zoneEnd.toDouble()),
                 change: (RangeValues value) {
                   setState(() {
-                    Provider.of<LEDControllerModel>(context,listen: false).selectedMode.setZone(value.start.toInt(), value.end.toInt());
+                    Provider.of<LEDControllerModel>(context, listen: false)
+                        .selectedMode
+                        .setZone(value.start.toInt(), value.end.toInt());
                     model.setZone(value.start.toInt(), value.end.toInt());
                   });
                 },
               );
             }),
             const SizedBox(height: 8.0),
-            ColorList(colors:  model.colors, change: (colors)=>setState(() {
-              model.colors = colors;
-              Provider.of<LEDControllerModel>(context,listen: false).selectedMode.colors = colors;
-              animationModel.colors = colors;
-            }), colorLength: model.colorLength),
+            ColorList(
+                colors: model.colors,
+                change: (colors) => setState(() {
+                      model.colors = colors;
+                      Provider.of<LEDControllerModel>(context, listen: false).selectedMode.colors = colors;
+                      animationModel.colors = colors;
+                    }),
+                colorLength: model.colorLength),
             const SizedBox(height: 8.0),
             Container(
                 width: MediaQuery.of(context).size.width,
@@ -138,9 +146,8 @@ class _CurrentModePage extends State<CurrentModePage> {
   }
 
   changeMode(StripModes? mode) {
-
     if (mode != null && mode != model.mode) {
-      Provider.of<LEDControllerModel>(context,listen: false).selectedMode.mode = mode;
+      Provider.of<LEDControllerModel>(context, listen: false).selectedMode.mode = mode;
       model.mode = mode;
       animationModel.mode = mode;
       setState(() {});
@@ -151,8 +158,8 @@ class _CurrentModePage extends State<CurrentModePage> {
     if (name == "" || name == " ") {
       name = "Новый режим";
     }
-    if (name !=  model.name) {
-      Provider.of<LEDControllerModel>(context,listen: false).selectedMode.name = name;
+    if (name != model.name) {
+      Provider.of<LEDControllerModel>(context, listen: false).selectedMode.name = name;
       model.name = name;
       setState(() {});
     }
@@ -167,11 +174,9 @@ class _CurrentModePage extends State<CurrentModePage> {
     }
     if (speed0 != model.speed) {
       model.speed = speed0;
-      Provider.of<LEDControllerModel>(context,listen: false).selectedMode.speed = speed0;
+      Provider.of<LEDControllerModel>(context, listen: false).selectedMode.speed = speed0;
       animationModel.duration = Duration(milliseconds: speed0 * 1000);
       setState(() {});
     }
   }
-
-
 }

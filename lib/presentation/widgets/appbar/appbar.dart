@@ -6,6 +6,7 @@ class AppBarModel extends ChangeNotifier {
     _current = appBar;
     notifyListeners();
   }
+
   get current => _current;
   setCustomAppBar({required String text, IconData? iconData, double iconSize = 24}) {
     _current = customAppBar(text: text, iconData: iconData, iconSize: iconSize);

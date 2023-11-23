@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class GradientAnimation extends StatefulWidget {
-  const GradientAnimation({super.key,required this.colors, this.duration =const Duration(seconds: 0,milliseconds: 200)});
+  const GradientAnimation({super.key, required this.colors, this.duration = const Duration(seconds: 0, milliseconds: 200)});
   final List<Color> colors;
   final Duration duration;
 
@@ -32,13 +32,13 @@ class _GradientAnimation extends State<GradientAnimation> {
   }
 
   void updateColors() {
-
     setState(() {
-
-      if(counter>widget.colors.length-1){counter=0;}
+      if (counter > widget.colors.length - 1) {
+        counter = 0;
+      }
       color = widget.colors[counter];
     });
-    counter+=1;
+    counter += 1;
   }
 
   void _updateTimer(Timer timer) {

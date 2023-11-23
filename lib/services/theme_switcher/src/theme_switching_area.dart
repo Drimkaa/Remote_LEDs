@@ -11,7 +11,6 @@ class ThemeSwitchingArea extends StatelessWidget {
 
   final Widget child;
 
-
   @override
   Widget build(BuildContext context) {
     final model = ThemeModelInheritedNotifier.of(context);
@@ -23,11 +22,13 @@ class ThemeSwitchingArea extends StatelessWidget {
       late final Widget firstWidget, animWidget;
       if (model.isReversed) {
         firstWidget = _getPage(model.theme);
-        animWidget = RawImage(image: model.image, isAntiAlias: true,);
+        animWidget = RawImage(
+          image: model.image,
+          isAntiAlias: true,
+        );
       } else {
         firstWidget = RawImage(image: model.image);
         animWidget = _getPage(model.theme);
-
       }
       child = Stack(
         children: [

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:remote_leds/domain/entities/picker_type.dart';
+import 'package:remote_leds/domain/usecases/led_mode.dart';
 import 'package:remote_leds/domain/usecases/led_mode_card.dart';
 import 'package:remote_leds/presentation/screens/main/pages/modes_page/modes_page_presenter.dart';
-import 'package:remote_leds/domain/usecases/led_mode.dart';
 import 'package:remote_leds/presentation/screens/screen_presenter.dart';
 import 'package:remote_leds/presentation/widgets/animations_model.dart';
 
@@ -12,18 +12,23 @@ class EditScreenModel extends ChangeNotifier {
   late ModesPageModel _modesPageModel;
 
   EditScreenModel();
-  void setListPageModel(ModesPageModel ledModeListPage){
+
+  void setListPageModel(ModesPageModel ledModeListPage) {
     _modesPageModel = ledModeListPage;
   }
+
   late ScreenModel _screenModel;
-  void setScreenModel(ScreenModel screenModel){
+
+  void setScreenModel(ScreenModel screenModel) {
     _screenModel = screenModel;
   }
-  init({pageType = PickerType.add,required LEDModeModel led}){
+
+  init({pageType = PickerType.add, required LEDModeModel led}) {
     this.led = led;
     this.pageType = pageType;
     animationModel = AnimationModel(led.colors, led.mode, Duration(seconds: led.speed));
   }
+
   changeMode(StripModes? mode) {
     if (mode != null && mode != led.mode) {
       led.mode = mode;
@@ -69,6 +74,7 @@ class EditScreenModel extends ChangeNotifier {
     led.setZone(values.start.toInt(), values.end.toInt());
     notifyListeners();
   }
+
   List<Color> get colors => led.colors;
   int get colorLength => led.colorLength;
   changeColor(int index, Color color) {
@@ -90,20 +96,25 @@ class EditScreenModel extends ChangeNotifier {
       notifyListeners();
     }
   }
-  addNewMode(){
-    if(led.colors.isNotEmpty) _modesPageModel.addMode(LEDModeCardModel(led));
+
+  addNewMode() {
+    if (led.colors.isNotEmpty) _modesPageModel.addMode(LEDModeCardModel(led));
     moveBack();
   }
-  editExistingMode(){
-    if(led.colors.isNotEmpty) _modesPageModel.editMode(LEDModeCardModel(led));
+
+  editExistingMode() {
+    if (led.colors.isNotEmpty) _modesPageModel.editMode(LEDModeCardModel(led));
     moveBack();
   }
-  deleteExistingMode(){
+
+  deleteExistingMode() {
     _modesPageModel.deleteMode(LEDModeCardModel(led));
     moveBack();
   }
-  moveBack(){
+
+  moveBack() {
     _screenModel.back();
   }
+
   int maxColors = 1;
 }

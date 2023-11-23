@@ -2,11 +2,10 @@ import 'dart:async';
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
-
-
-import 'clippers/theme_switcher_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+
+import 'clippers/theme_switcher_clipper.dart';
 
 typedef ThemeBuilder = Widget Function(BuildContext, ThemeData theme);
 
@@ -28,8 +27,7 @@ class ThemeProvider extends StatefulWidget {
   State<ThemeProvider> createState() => _ThemeProviderState();
 }
 
-class _ThemeProviderState extends State<ThemeProvider>
-    with TickerProviderStateMixin {
+class _ThemeProviderState extends State<ThemeProvider> with TickerProviderStateMixin {
   late AnimationController _controller;
   late ThemeModel model;
 
@@ -70,9 +68,7 @@ class ThemeModelInheritedNotifier extends InheritedNotifier<ThemeModel> {
   });
 
   static ThemeModel of(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<ThemeModelInheritedNotifier>()!
-        .notifier!;
+    return context.dependOnInheritedWidgetOfExactType<ThemeModelInheritedNotifier>()!.notifier!;
   }
 }
 
@@ -126,9 +122,8 @@ class ThemeModel extends ChangeNotifier {
   }
 
   Future<void> _saveScreenshot() async {
-    final boundary = previewContainer.currentContext?.findRenderObject()
-    as RenderRepaintBoundary;
-    image = await boundary.toImage(pixelRatio:  PlatformDispatcher.instance.implicitView!.devicePixelRatio);
+    final boundary = previewContainer.currentContext?.findRenderObject() as RenderRepaintBoundary;
+    image = await boundary.toImage(pixelRatio: PlatformDispatcher.instance.implicitView!.devicePixelRatio);
     //TODO проверить работает ли changeDevisePixelRatio
     notifyListeners();
   }
@@ -139,13 +134,9 @@ class ThemeModel extends ChangeNotifier {
     super.dispose();
   }
 
-  Offset _getSwitcherCoordinates(
-      GlobalKey<State<StatefulWidget>> switcherGlobalKey) {
-    final renderObject =
-    switcherGlobalKey.currentContext?.findRenderObject() as RenderBox;
+  Offset _getSwitcherCoordinates(GlobalKey<State<StatefulWidget>> switcherGlobalKey) {
+    final renderObject = switcherGlobalKey.currentContext?.findRenderObject() as RenderBox;
     final size = renderObject.size;
-    return renderObject
-        .localToGlobal(Offset.zero)
-        .translate(size.width / 2, size.height / 2);
+    return renderObject.localToGlobal(Offset.zero).translate(size.width / 2, size.height / 2);
   }
 }

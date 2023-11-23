@@ -26,7 +26,6 @@ class _ModesPageDeleteModeAppBar extends State<ModesPageDeleteModeAppBar> {
           Consumer<ModesPageModel>(
             builder: (context, model, child) => Text(
               "Выбрано (${model.selectedToDelete})",
-
             ),
           ),
           CustomIconButton(

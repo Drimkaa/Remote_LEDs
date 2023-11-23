@@ -1,9 +1,9 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:remote_leds/domain/usecases/led_controller.dart';
+import 'package:remote_leds/domain/usecases/led_mode.dart';
 import 'package:remote_leds/domain/usecases/led_mode_card.dart';
 import 'package:remote_leds/presentation/screens/main/pages/modes_page/modes_page_presenter.dart';
-import 'package:remote_leds/domain/usecases/led_mode.dart';
 import 'package:remote_leds/presentation/widgets/mode_card/mode_card_wrapper.dart';
 
 class ModesPage extends StatefulWidget {
@@ -23,7 +23,7 @@ class _ModesPage extends State<ModesPage> {
 
   double y = 0;
   changeTree(BuildContext context) {
-    Provider.of<ModesPageModel>(context,listen: false).pageSetMode();
+    Provider.of<ModesPageModel>(context, listen: false).pageSetMode();
     Provider.of<ModesPageModel>(context, listen: false).addMode(LEDModeCardModel(LEDModeModel(colors: [Colors.blueAccent])));
   }
 
@@ -66,7 +66,10 @@ class _ModesPage extends State<ModesPage> {
                         setState(() {
                           model.cardOnPress(modes[i]);
                         });
-                      }, changeDeleteStatus: () { model.cardChangeDeleteStatus(modes[i]); },
+                      },
+                      changeDeleteStatus: () {
+                        model.cardChangeDeleteStatus(modes[i]);
+                      },
                     ),
                     if (i != modes.length - 1) const SizedBox(height: 8),
                   ],
